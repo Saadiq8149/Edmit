@@ -1,0 +1,321 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 199 89% 48%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 142 71% 45%;
+    --accent-foreground: 210 40% 98%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.gradient-primary {
+  @apply bg-gradient-to-r from-primary to-secondary;
+}
+
+.gradient-full {
+  @apply bg-gradient-to-r from-primary via-secondary to-accent;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+}
+
+.clean-input {
+  @apply border-2 border-gray-100 focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-200;
+}
+
+.clean-select {
+  @apply border-2 border-gray-100 focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-200;
+}
+
+.search-results {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add these to your existing styles */
+
+/* Animated Gradient Background */
+.animated-gradient {
+  background: linear-gradient(125deg, #4f46e5, #3b82f6, #14b8a6, #6366f1);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Shimmering Text Effect */
+.shimmer-text {
+  background: linear-gradient(to right, #f7f7f7 0%, #ffffff 20%, #f7f7f7 40%, #f7f7f7 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Animated Background Elements */
+.animated-circles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0.4;
+}
+
+.animated-circles::before,
+.animated-circles::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  animation: float 10s infinite alternate;
+}
+
+.animated-circles::before {
+  top: -100px;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.animated-circles::after {
+  bottom: -100px;
+  right: 10%;
+  width: 400px;
+  height: 400px;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px) scale(1);
+  }
+
+  50% {
+    transform: translatey(-20px) scale(1.05);
+  }
+
+  100% {
+    transform: translatey(0px) scale(1);
+  }
+}
+
+.animated-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 60%;
+  height: 40%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, rgba(99, 102, 241, 0) 70%);
+  filter: blur(30px);
+  z-index: 0;
+  animation: pulse 8s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+}
+
+/* Glowing Search Box */
+.glow-on-hover:hover .search-container input {
+  box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+}
+
+.shadow-custom {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-glow-blue {
+  box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+}
+
+.shadow-glow-white {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(99, 102, 241, 0.3);
+  border-radius: 50%;
+  border-top-color: #4f46e5;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Glow text container */
+.glow-text-container {
+  position: relative;
+}
+
+.glow-text-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 20px;
+  transform: translateY(10px);
+  filter: blur(20px);
+  background: rgba(99, 102, 241, 0.7);
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.lazy-load-wrapper {
+  min-height: 100px;
+}
+
+.step-container {
+  position: relative;
+}
+
+.step-container:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(to right, theme("colors.primary.DEFAULT"), theme("colors.secondary.DEFAULT"));
+}
+
+@media (max-width: 768px) {
+  .step-container:not(:last-child)::after {
+    top: auto;
+    right: 50%;
+    bottom: -15px;
+    width: 2px;
+    height: 30px;
+    transform: translateX(50%);
+    background: linear-gradient(to bottom, theme("colors.primary.DEFAULT"), theme("colors.secondary.DEFAULT"));
+  }
+}
+
+.banner {
+  @apply relative overflow-hidden rounded-xl;
+  background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 60%);
+  transform: rotate(30deg);
+}
+
+.banner-content {
+  @apply relative z-10 p-8;
+}
+
+.card-header-gradient {
+  @apply bg-gradient-to-r from-primary to-secondary text-white rounded-t-xl;
+}

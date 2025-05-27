@@ -131,6 +131,8 @@ export default function CollegePage() {
 
   return (
     <div className="relative min-h-screen">
+      <meta title={`${collegeData.name}, NEET Cutoff Rank (MBBS) – Opening & Closing Ranks by Category`} />
+      <meta name="description" content={`NEET UG MBBS cutoff for ${collegeData.name}, with opening & closing ranks across categories (General, SC, ST, OBC, EWS). Plan your medical admission with precise data.`} />
       {/* Background Gradient with animated pattern */}
       <div className="fixed inset-0 bg-gradient-to-br from-primary/5 to-primary/10 -z-10"></div>
       <div className="fixed inset-0 opacity-30 -z-10 bg-grid-pattern"></div>
@@ -161,14 +163,13 @@ export default function CollegePage() {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <h1 className="text-2xl md:text-4xl font-bold mb-2 md:mb-3 text-white flex items-center">
-                  {isLoading ? "Loading..." : collegeData.name || "College Details"}
+                  {isLoading ? "Loading..." : `${collegeData.name}– NEET MBBS Cutoff Ranks: Category-Wise Opening & Closing Ranks` || "College Details"}
                 </h1>
-                {/* <p className="text-white/90 mb-2 md:mb-4">
-                  <span className="flex items-center gap-1 md:gap-2">
-                    <MapPin className="h-3 w-3 md:h-4 md:w-4" />
-                    {collegeData.state || "Location information unavailable"}
+                <h2 className="text-white/90 mb-2 md:mb-4 flex items-center gap-1 md:gap-2 text-sm md:text-base">
+                  <span className="line-clamp-2">
+                    NEET UG MBBS Cutoff at {collegeData.name}: Opening & Closing Ranks by Category (General, SC, ST, OBC, EWS)
                   </span>
-                </p> */}
+                </h2>
               </div>
             </div>
           </div>

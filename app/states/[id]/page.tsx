@@ -164,6 +164,8 @@ export default function StatePage() {
   })
   return (
     <div className="relative min-h-screen">
+      <meta title={`${stateData.name} NEET Cutoff Ranks (MBBS) – Category & College Wise (AIIMS, Govt & Private)`} />
+      <meta name="description" content={`NEET UG MBBS cutoff ranks in ${stateData.name} by category (General, SC, ST, OBC, EWS) and college type (AIIMS, government, private). Plan your medical admission strategy in ${stateData.name} with precise data.`} />
       {/* Background Gradient with animated pattern */}
       <div className="fixed inset-0 bg-gradient-to-br from-primary/5 to-primary/10 -z-10"></div>
       <div className="fixed inset-0 opacity-30 -z-10 bg-grid-pattern"></div>
@@ -204,14 +206,13 @@ export default function StatePage() {
             <div className="flex flex-col md:flex-row justify-between items-start">
               <div className="max-w-full">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-white line-clamp-2 break-words hyphens-auto">
-                  {isLoading ? "Loading..." : stateData.name}
+                  {isLoading ? "Loading..." : `${stateData.name}, NEET MBBS Cutoff Ranks – AIIMS, State Government & Private Medical Colleges, Category-Wise`}
                 </h1>
-                {/* <p className="text-white/90 mb-2 md:mb-4 flex items-center gap-1 md:gap-2 text-sm md:text-base">
-                  <MapPin className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
+                <h2 className="text-white/90 mb-2 md:mb-4 flex items-center gap-1 md:gap-2 text-sm md:text-base">
                   <span className="line-clamp-2">
-                    Explore medical colleges and NEET cutoffs in {isLoading ? "this state" : stateData.name}
+                    Detailed {stateData.name} NEET UG MBBS Cutoff Analysis: Opening & Closing Ranks for AIIMS, Government Medical Colleges & Private Institutions by Category (General, SC, ST, OBC, EWS)
                   </span>
-                </p> */}
+                </h2>
 
                 <div className="mt-2 md:mt-4 flex flex-wrap gap-2">
                   <Badge variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-none backdrop-blur-sm text-xs md:text-sm h-6 md:h-7">

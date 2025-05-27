@@ -1,4 +1,4 @@
-import { query } from '@/lib/db';
+import { query } from '@/lib/db'; // Assumes this now uses pg client
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -9,7 +9,7 @@ export async function GET(
         const stateId = params.state_id;
 
         const results = await query<{ category: string }>(
-            'SELECT DISTINCT category FROM cutoffs WHERE state_id = ?',
+            'SELECT DISTINCT category FROM cutoffs WHERE state_id = $1',
             [stateId]
         );
 

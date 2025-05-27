@@ -1,4 +1,4 @@
-import { query } from '@/lib/db';
+import { query } from '@/lib/db'; // This should be set up to use PostgreSQL (e.g., pg)
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -9,7 +9,7 @@ export async function GET(
         const collegeId = params.college_id;
 
         const results = await query<{ name: string }>(
-            'SELECT name FROM colleges WHERE id = ?',
+            'SELECT name FROM colleges WHERE id = $1',
             [collegeId]
         );
 

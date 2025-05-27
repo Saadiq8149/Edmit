@@ -1,4 +1,4 @@
-import { query } from '@/lib/db';
+import { query } from '@/lib/db'; // Ensure this uses pg for PostgreSQL
 import { NextResponse } from 'next/server';
 
 export async function GET() {

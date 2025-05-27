@@ -42,7 +42,7 @@ export default function Navbar() {
   // Move ALL useEffect hooks here, before any conditionals
   useEffect(() => {
     // Don't fetch data if we're on the homepage
-    if (isHomePage) return;
+    // if (isHomePage) return;
 
     async function fetchData() {
       setIsLoading(true)
@@ -83,7 +83,7 @@ export default function Navbar() {
 
   // Close search results when clicking outside
   useEffect(() => {
-    if (isHomePage) return;
+    // if (isHomePage) return;
 
     function handleClickOutside(event: MouseEvent) {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
@@ -118,7 +118,7 @@ export default function Navbar() {
   }, [debouncedSearchQuery])
 
   // If this is the homepage, don't render the navbar
-  if (isHomePage) return null;
+  // if (isHomePage) return null;
 
   // Filter results based on search query - these aren't hooks so they can be after the conditional return
   const filteredStates = statesData.filter((state) =>

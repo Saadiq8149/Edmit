@@ -1,4 +1,4 @@
-import { query } from '@/lib/db';
+import { query } from '@/lib/db'; // Ensure this is PostgreSQL-backed
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -9,7 +9,7 @@ export async function GET(
         const collegeId = params.college_id;
 
         const cutoffs = await query(
-            'SELECT * FROM cutoffs WHERE college_id = ?',
+            'SELECT * FROM cutoffs WHERE college_id = $1',
             [collegeId]
         );
 

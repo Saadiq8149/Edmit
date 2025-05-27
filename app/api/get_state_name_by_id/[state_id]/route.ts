@@ -1,4 +1,4 @@
-import { query } from '@/lib/db';
+import { query } from '@/lib/db'; // Should use PostgreSQL client (e.g. pg)
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -8,8 +8,10 @@ export async function GET(
     try {
         const stateId = params.state_id;
 
-        // SQLite uses '?' placeholders, not '$1'
-        const results = await query('SELECT name FROM states WHERE id = ?', [stateId]);
+        const results = await query(
+            'SELECT name FROM states WHERE id = $1',
+            [stateId]
+        );
 
         const state = results.length > 0 ? results[0] : null;
 

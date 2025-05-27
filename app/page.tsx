@@ -188,6 +188,8 @@ export default function Home() {
 
   return (
     <main className="flex h-[100dvh] overflow-hidden flex-col relative">
+      <meta title="All India NEET Cutoff Ranks (MBBS) – State, Category & College Wise" />
+      <meta name="description" content="NEET UG MBBS cutoff ranks across India by state, category (General, SC, ST, OBC, EWS), and college—AIIMS, government, and private. Compare and plan your admission strategy!" />
       {/* Full Page Gradient Background */}
       <div className="fixed inset-0 animated-gradient">
         <div className="absolute inset-0 w-full h-full">
@@ -205,17 +207,17 @@ export default function Home() {
           className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center px-4 z-10"
         >
           <div className="glow-text-container">
-            <h1 className="text-4xl sm:text-5xl font-bold leading-tight tracking-tighter md:text-6xl lg:text-7xl lg:leading-[1.1] shimmer-text">
-              Edmit
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight tracking-tighter mb-2 shimmer-text">
+              NEET MBBS Cutoff Ranks – State, Category & College Wise - AIIMS, Government Colleges and Private Colleges
             </h1>
           </div>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.7 }}
-            className="max-w-[750px] text-base sm:text-lg md:text-xl opacity-90"
+            className="max-w-[750px] text-sm sm:text-base md:text-lg opacity-90"
           >
-            All India NEET Cutoff Ranks (MBBS) – State, Category & College Wise
+            Statwise, College wise (AIMS, Government Medical Colleges, and Private Medical Colleges), Category wise (General, SC, ST, OBC, EWS etc) NEET UG MBBS Cutoff Ranks
           </motion.p>
         </motion.div>
 

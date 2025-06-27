@@ -11,8 +11,10 @@ interface StateCardProps {
 }
 
 export default function StateCard({ state }: StateCardProps) {
+  const stateSlug = state.name.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "")    // trim leading/trailing hyphens
+
   return (
-    <Link href={`/states/${state.id}-${state.name.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "")}`} className="w-full">
+    <Link href={`/states/${state.id}-${stateSlug}`} className="w-full">
       <Card className="overflow-hidden transition-all hover:shadow-lg hover:scale-105 duration-300 border-0 shadow-md">
         <div className="aspect-video relative">
           <Image src={state.image || "/placeholder.svg"} alt={state.name} fill className="object-cover" />

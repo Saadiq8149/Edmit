@@ -64,10 +64,10 @@ export default function Navbar() {
       try {
         const collegesResponse = await fetch("/api/get_colleges")
         let data = await collegesResponse.json()
-        data = data["colleges"]?.map((college: { id: any, name: any }) => {
+        data = data["colleges"]?.map((college: { id: any, name: any, formatted_name: any }) => {
           return {
             "id": college.id,
-            "name": college.name,
+            "name": college.formatted_name || college.name,
             "image": "/placeholder.svg?height=40&width=40"
           }
         }) || []
@@ -232,7 +232,7 @@ export default function Navbar() {
                         {filteredStates.map((state) => (
                           <Link
                             key={state.id}
-                            href={`/states/${state.id}`}
+                            href={`/states/${state.id}-${state.name.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "")}`}
                             className="flex items-center gap-2 p-2 rounded-md hover:bg-muted transition-colors"
                             onClick={() => {
                               setShowResults(false)
@@ -262,7 +262,7 @@ export default function Navbar() {
                         {filteredColleges.slice(0, 8).map((college) => (
                           <Link
                             key={college.id}
-                            href={`/colleges/${college.id}`}
+                            href={`/colleges/${college.id}-${college.name.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "")}`}
                             className="flex items-center gap-3 p-2 rounded-md hover:bg-muted transition-colors"
                             onClick={() => {
                               setShowResults(false)

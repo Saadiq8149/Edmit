@@ -8,9 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Search, X, CheckCircle, Clock, ArrowRight, Star, TrendingUp, Bell } from "lucide-react"
 import { useDebounce } from "@/hooks/use-debounce"
 import { motion } from "framer-motion"
-// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-// import { Badge } from "@/components/ui/badge"
-// import { Separator } from "@/components/ui/separator"
+import { Metadata } from 'next';
 
 export default function Home() {
   interface State {
@@ -89,9 +87,9 @@ export default function Home() {
       try {
         const collegesResponse = await fetch("/api/get_colleges")
         let data = await collegesResponse.json()
-        data = data["colleges"]?.map((college: { id: any, name: any }) => ({
+        data = data["colleges"]?.map((college: { id: any, name: any, formatted_name: any }) => ({
           "id": college.id,
-          "name": college.name,
+          "name": college.formatted_name || college.name,
           "image": "/placeholder.svg?height=40&width=40"
         })) || []
         setColleges(data)
@@ -188,36 +186,34 @@ export default function Home() {
 
   return (
     <main className="flex h-[100dvh] overflow-hidden flex-col relative">
-      <meta title="All India NEET Cutoff Ranks (MBBS) – State, Category & College Wise" />
-      <meta name="description" content="NEET UG MBBS cutoff ranks across India by state, category (General, SC, ST, OBC, EWS), and college—AIIMS, government, and private. Compare and plan your admission strategy!" />
-      {/* Full Page Gradient Background */}
-      <div className="fixed inset-0 animated-gradient">
-        <div className="absolute inset-0 w-full h-full">
-          <div className="animated-circles"></div>
-          <div className="animated-glow"></div>
-        </div>
-      </div>
-
       {/* Hero Section Content */}
       <section className="flex flex-1 flex-col items-center justify-center gap-6 py-8 md:py-12 lg:py-16 text-white relative z-10 h-full">
+        {/* Limited Gradient Background only to hero section */}
+        <div className="absolute inset-0 animated-gradient">
+          <div className="w-full h-full">
+            <div className="animated-circles"></div>
+            <div className="animated-glow"></div>
+          </div>
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center px-4 z-10"
         >
-          <div className="glow-text-container">
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight tracking-tighter mb-2 shimmer-text">
-              NEET MBBS Cutoff Ranks – State, Category & College Wise - AIIMS, Government Colleges and Private Colleges
-            </h1>
-          </div>
+          <div className="glow-text-container"></div>
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight tracking-tighter mb-2 shimmer-text">
+            NEET MBBS Cutoff Ranks – State, Category & College Wise - AIIMS, Government Colleges and Private Colleges
+          </h1>
+
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.7 }}
             className="max-w-[750px] text-sm sm:text-base md:text-lg opacity-90"
           >
-            Statwise, College wise (AIMS, Government Medical Colleges, and Private Medical Colleges), Category wise (General, SC, ST, OBC, EWS etc) NEET UG MBBS Cutoff Ranks
+            Statewise, College wise (AIMS, Government Medical Colleges, and Private Medical Colleges), Category wise (General, SC, ST, OBC, EWS etc) NEET UG MBBS Cutoff Ranks
           </motion.p>
         </motion.div>
 
@@ -234,7 +230,7 @@ export default function Home() {
             <Input
               ref={inputRef}
               type="search"
-              placeholder="Search for colleges, exams, or states..."
+              placeholder="Search for colleges or states..."
               className="w-full h-12 md:h-14 rounded-full pl-10 pr-10 text-gray-800 bg-white/95 backdrop-blur-sm border-0 shadow-custom transition-all"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -310,7 +306,7 @@ export default function Home() {
                               {filteredStates.map((state) => (
                                 <Link
                                   key={state.id}
-                                  href={`/states/${state.id}`}
+                                  href={`/states/${state.id}-${state.name.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "")}`}
                                   className="flex items-center gap-2 p-2 rounded-md hover:bg-accent/50 transition-colors"
                                   onClick={() => setShowResults(false)}
                                 >
@@ -337,7 +333,7 @@ export default function Home() {
                               {filteredColleges.slice(0, 8).map((college) => (
                                 <Link
                                   key={college.id}
-                                  href={`/colleges/${college.id}`}
+                                  href={`/colleges/${college.id}-${college.name.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "")}`}
                                   className="flex items-center gap-3 p-2 rounded-md hover:bg-accent/50 transition-all"
                                   onClick={() => setShowResults(false)}
                                 >
@@ -393,22 +389,6 @@ export default function Home() {
           )}
         </motion.div>
 
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="flex flex-wrap justify-center gap-3 mt-2 z-[50]"
-        >
-          <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2 text-sm border border-white/30 hover:bg-white/30 transition-colors">
-            <CheckCircle className="h-4 w-4" />
-            <span>NEET Supported</span>
-          </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2 text-sm border border-white/30 hover:bg-white/30 transition-colors">
-            <Clock className="h-4 w-4" />
-            <span>JEE Coming Soon</span>
-          </div>
-        </motion.div> */}
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -433,7 +413,8 @@ export default function Home() {
           </Button>
         </motion.div>
       </section>
-    </main>
+      {/* Stats Section */}
+    </main >
   )
 }
 

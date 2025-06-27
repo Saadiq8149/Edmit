@@ -30,14 +30,14 @@ export async function GET(
         if (collegeIds.length > 0) {
             // PostgreSQL allows passing an array and using ANY
             const collegeNames = await query(
-                `SELECT id, name FROM colleges WHERE id = ANY($1)`,
+                `SELECT id, name, formatted_name FROM colleges WHERE id = ANY($1)`,
                 [collegeIds]
             );
 
-            // Map college_id ➝ college name
+            // Map college_id ➝ formatted_name (or fallback to name)
             const collegeMap = new Map<number, string>();
             for (const college of collegeNames) {
-                collegeMap.set(college.id, college.name);
+                collegeMap.set(college.id, college.formatted_name || college.name);
             }
 
             // Attach college names
@@ -47,6 +47,7 @@ export async function GET(
         }
 
         return NextResponse.json({ cutoffs });
+
     } catch (error) {
         console.error('Error fetching cutoffs by state:', error);
         return NextResponse.json({ cutoffs: [] }, { status: 500 });

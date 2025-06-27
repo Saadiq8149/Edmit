@@ -13,6 +13,7 @@ interface CollegeCardProps {
 
 export default function CollegeCard({ college }: CollegeCardProps) {
   let collegeSlug = college.name.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "")
+
   return (
     <Link href={`/colleges/${college.id}-${collegeSlug}`} className="w-full">
       <Card className="overflow-hidden transition-all hover:shadow-lg hover:scale-105 duration-300 border-0 shadow-md">
